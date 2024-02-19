@@ -24,7 +24,7 @@ class ChatPrivate:
         self.prompt = PromptTemplate.from_template(
             """
             <s> [INST] You are an assistant for question-answering tasks. Use the following pieces of retrieved context 
-            to answer the question. If you don't know the answer, just say that you don't know. Use 3 sentences
+            to answer the question. If you don't know the answer, just say that you don't know. Use three sentences
              maximum and keep the answer concise. [/INST] </s> 
             [INST] Question: {question} 
             Context: {context} 
@@ -63,7 +63,7 @@ class ChatPrivate:
 
         self.retriever = vector_store.as_retriever(
             search_type="mmr",
-            search_kwargs={'k': 6, 'lambda_mult': 0.25}
+            search_kwargs={'k': 8, 'lambda_mult': 0.25}
         )
 
         self.chain = ({"context": self.retriever, "question": RunnablePassthrough()}
